@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgba(0, 0, 0, 0.281);
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin: 40px;
+        }
+
+        .main input {
+            box-sizing: border-box;
+            margin: 11px 0px;
+            width: 300px;
+            height: 80px;
+            border: 2px solid black;
+            border-radius: 5px;
+            color: white;
+            font-size: larger;
+            text-align: center;
+            /* padding: 0px 40px; */
+            background-color: rgba(0, 0, 0, 0.765);
+        }
+
+        .main select {
+            width: 200px;
+            background-color: black;
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <select id="type1">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+            <!-- <option value="R"></option> -->
+        </select>
+        <input type="number" id="n1" placeholder="Enter Value" value="">
+
+    </div>
+    <h1>=</h1>
+    <div class="main">
+        <select id="type2">
+            <option value="F">Fahrenheit</option>
+            <option value="C">Celsius</option>
+            <option value="K">Kelvin</option>
+            <!-- <option value="R"></option> -->
+        </select>
+        <input type="number" id="n2" placeholder="Enter Value">
+
+    </div>
+    <script>
+        let cel, far, kal;
+        let input = document.getElementById('n1');
+        let output = document.getElementById('n2');
+        let optionIn = document.getElementById('type1');
+        let optionOut = document.getElementById('type2');
+
+        const temprature = () => {
+            if (optionIn.value === 'C') {
+
+                cel = Number(input.value);
+                if (optionOut.value === 'C') {
+
+                    output.value = cel.toFixed(2);
+                }
+                else if (optionOut.value === 'F') {
+                    far = (cel * 9 / 5) + 32;
+                    output.value = far.toFixed(2);
+                }
+                else if (optionOut.value === 'K') {
+                    kal = cel + 273.15;
+                    output.value = kal.toFixed(2);
+                }
+            }
+
+            else if (optionIn.value === 'F') {
+
+                far = Number(input.value);
+                if (optionOut.value === 'C') {
+                    cel = 5 / 9 * (far - 32);
+                    output.value = cel.toFixed(2);
+                }
+                else if (optionOut.value === 'F') {
+                    output.value = far.toFixed(2);
+                }
+                else if (optionOut.value === 'K') {
+                    kal = (far + 459.67) * (5 / 9);
+                    output.value = kal.toFixed(2);
+                }
+            }
+
+
+
+            else if (optionIn.value === 'K') {
+
+                kal = Number(input.value);
+                if (optionOut.value === 'C') {
+                    cel = kal - 273.15;
+                    output.value = cel.toFixed(2);
+                }
+                else if (optionOut.value === 'F') {
+                    far = (kal * (9 / 5)) - 459.67;
+                    output.value = far.toFixed(2);
+                }
+                else if (optionOut.value === 'K') {
+
+                    output.value = kal.toFixed(2);
+                }
+            }
+        }
+
+        input.addEventListener('keyup', temprature);
+        output.addEventListener('keyup', temprature);
+        optionIn.addEventListener('change', temprature);
+        optionOut.addEventListener('change', temprature);
+    </script>
+</body>
+
+</html>
